@@ -15,3 +15,6 @@
     state: restarted
 
 
+- debug: msg="give it 1 minute to deploy and open http://172.16.5.12:8080/AM-eval-5.0.0"
+
+
