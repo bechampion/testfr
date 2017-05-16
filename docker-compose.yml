@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+  opendj:
+    image: kainos/opendj
+    ports:
+     - "389:389"
+  openam:
+    image: rkumari/opendj
+    ports:
+      - "8080:8080"
+    #command: bash -c "apt-get update ; apt-get -y install netcat lsof ; bash /tmp/run-openam.sh"

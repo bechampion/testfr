@@ -1,0 +1,6 @@
+---
+ - hosts: opendjserver
+   become: true
+   roles:
+    - roles/ansible-role-java
+    - roles/ans-opendj

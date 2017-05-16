@@ -1,0 +1,5 @@
+---
+ - hosts: openamserver
+   become: true
+   roles:
+    - roles/ansible-role-java
