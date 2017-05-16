@@ -8,7 +8,7 @@
     - tomcat
     - unzip
 
-- shell: unzip -o -j /vagrant/vargrant/AM-eval-5.0.0.zip -d /usr/share/tomcat/webapps/
+- shell: unzip -o -j /vagrant/AM-eval-5.0.0.zip -d /usr/share/tomcat/webapps/
 
 - service:
     name: tomcat
