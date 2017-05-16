@@ -2,5 +2,16 @@
 # tasks file for ans-tomcat-etc
 - name: install the latest version of Tomcat
   yum:
-    name: tomcat
+    name: "{{item}}"
     state: latest
+  with_items:
+    - tomcat
+    - unzip
+
+- shell: unzip -j /vagrant/vargrant/AM-eval-5.0.0.zip -d /usr/share/tomcat/webapps/
+
+- service:
+    name: tomcat
+    state: restarted
+
+
