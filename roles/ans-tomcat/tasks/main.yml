@@ -1,7 +1,0 @@
----
-# tasks file for tomcat
-- name: install the latest version of tomcat
-  yum:
-    name: tomcat
-    state: latest
-

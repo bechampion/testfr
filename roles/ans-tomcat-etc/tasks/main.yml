@@ -1,0 +1,6 @@
+---
+# tasks file for ans-tomcat-etc
+- name: install the latest version of Tomcat
+  yum:
+    name: tomcat
+    state: latest
