@@ -1,4 +1,4 @@
 curl  --silent --request POST  --header "Content-Type: application/json"  --header "X-OpenAM-Username: user.0"  --header "X-OpenAM-Password: qwe123qwe123"  --header "Accept-API-Version: resource=2.0, protocol=1.0"  http://172.16.5.12:8080/AM-eval-5.0.0/json/authenticate 
 
 
-ldapsearch -h 172.16.5.11 -D "cn=admin" -w password -b "dc=example,dc=com" "(uid=user.0)"  uid -fff
+ldapsearch -h 172.16.5.11 -D "cn=admin" -w password -b "dc=example,dc=com" "(uid=user.0)"  
