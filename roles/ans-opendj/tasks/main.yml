@@ -21,6 +21,9 @@
 
 - name: copy opendj props file
   template: src=opendj.properties dest=/tmp/opendj.properties 
+- copy:
+   src: admins.ldif
+   dest: /tmp/admins.ldif
   
 - name: setup opendj
   command: creates={{install_root}}/opendj/config {{install_root}}/opendj/setup --cli --propertiesFilePath /tmp/opendj.properties --acceptLicense --no-prompt 

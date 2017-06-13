@@ -1,0 +1,20 @@
+---
+# tasks file for ans-tomcat-etc
+- name: install the latest version of Tomcat
+  yum:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - tomcat
+    - unzip
+
+- shell: mv /vagrant/IG-5.0.0.war /usr/share/tomcat/webapps/openig.war
+
+- service:
+    name: tomcat
+    state: restarted
+
+
+- debug: msg="give it 1 minute to deploy and open http://172.16.5.13:8080/openig"
+
+
