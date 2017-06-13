@@ -9,12 +9,13 @@
     - unzip
 
 - shell: unzip -o -j /vagrant/AM-eval-5.0.0.zip -d /usr/share/tomcat/webapps/
+- shell: mv /usr/share/tomcat/webapps/AM-eval-5.0.0.war /usr/share/tomcat/webapps/openam.war
 
 - service:
     name: tomcat
     state: restarted
 
 
-- debug: msg="give it 1 minute to deploy and open http://172.16.5.12:8080/AM-eval-5.0.0"
+- debug: msg="give it 1 minute to deploy and open http://172.16.5.12:8080/openam"
 
 

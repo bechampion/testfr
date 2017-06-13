@@ -24,6 +24,19 @@
             ansible.verbose = ""
         end
     end
+    config.vm.define "openigserver" do | openigserver | 
+        config.vm.provider "virtualbox" do |v|
+            v.memory = 1024
+            v.cpus = 1
+        end
+        config.vm.provision "file", source: "/vagrant/vagrant/IG-5.0.0.war", destination: "/vagrant/IG-5.0.0.war"
+        openigserver.vm.box = "centos/7"
+        openigserver.vm.network "private_network", ip: "172.16.5.13"
+        openigserver.vm.provision "ansible" do |ansible|
+            ansible.playbook = "openig.yml"
+            ansible.verbose = ""
+        end
+    end
 end
 
 
