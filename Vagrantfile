@@ -16,7 +16,7 @@
             v.memory = 1024
             v.cpus = 1
         end
-        config.vm.provision "file", source: "vagrant/AM-eval-5.0.0.zip", destination: "/vagrant/AM-eval-5.0.0.zip"
+        #config.vm.provision "file", source: "vagrant/*", destination: "/vagrant/"
         openamserver.vm.box = "centos/7"
         openamserver.vm.network "private_network", ip: "172.16.5.12"
         openamserver.vm.provision "ansible" do |ansible|
