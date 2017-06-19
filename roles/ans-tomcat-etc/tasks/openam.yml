@@ -9,9 +9,11 @@
     name: tomcat
     state: restarted
 
-- name: Pausing for 1 minutes to allow the app to deploy
-  pause:
-    minutes: 1
-
-
-
+- name: "wait for OpenAM to come up"
+  uri:
+    url: "http://127.0.0.1:8080/openam/"
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 60
+  delay: 1
