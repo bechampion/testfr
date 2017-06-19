@@ -13,7 +13,7 @@
     end
     config.vm.define "openamserver" do | openamserver | 
         config.vm.provider "virtualbox" do |v|
-            v.memory = 1024
+            v.memory = 4096
             v.cpus = 1
         end
         #config.vm.provision "file", source: "vagrant/*", destination: "/vagrant/"

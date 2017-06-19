@@ -1,0 +1,26 @@
+- name: Templating Oauth2 agent properties
+  template:
+    src: templates/client.properties
+    dest: /tmp/client.properties
+
+- name: Templating Oauth2 creds needed
+  template:
+    src: templates/creds
+    dest: /tmp/creds
+    mode: '0400'
+- name: Unziping OpenAM SSOAdmin tool
+  shell: unzip -o /vagrant/AM-SSOAdminTools-5.1.0.zip -d /tmp/openamadmin
+
+- name: Installing OpenAM SSOAdmin tool
+  shell: JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.x86_64/jre/ ./setup --acceptLicense --path /usr/share/tomcat/webapps/openam
+  args:
+    chdir: /tmp/openamadmin
+
+- name: Creating OpenAM Oauth2 demo agent
+  shell: ./ssoadm create-agent --realm / --agentname demo --agenttype "OAuth2Client" --adminid amadmin --password-file /tmp/creds --datafile /tmp/client.properties
+  args:
+    chdir: /tmp/openamadmin/openam/bin
+
+- debug: msg="give it 1 minute to deploy and open http://172.16.5.12:8080/openam"
+
+

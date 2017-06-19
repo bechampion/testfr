@@ -1,0 +1,17 @@
+- name: Unziping OpenAM
+  shell: unzip -o -j /vagrant/AM-eval-5.1.0.zip -d /tmp/openam
+
+- name: Move OpenAM war file to Tomcat webapp folder
+  shell: mv /tmp/openam/AM-eval-5.1.0.war /usr/share/tomcat/webapps/openam.war
+
+- name: Restarting Tomcat
+  service:
+    name: tomcat
+    state: restarted
+
+- name: Pausing for 1 minutes to allow the app to deploy
+  pause:
+    minutes: 1
+
+
+

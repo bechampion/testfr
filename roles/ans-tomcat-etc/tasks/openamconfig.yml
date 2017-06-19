@@ -1,0 +1,14 @@
+- name: Unziping OpenAM Configuration Tools
+  shell: unzip -o /vagrant/AM-SSOConfiguratorTools-5.1.0.zip -d /tmp/openamconf
+
+- name: Templating OpenAm conf
+  template:
+    src: templates/openamconf.yaml
+    dest: /tmp/openamconf
+
+- name: Running OpenAM Configurator
+  shell: java -jar openam-configurator-tool-14.1.0.jar -f openamconf.yaml
+  args:
+    chdir: /tmp/openamconf/
+
+

@@ -1,33 +1,70 @@
 ---
 # tasks file for ans-tomcat-etc
-- name: install the latest version of Tomcat
-  yum:
-    name: "{{item}}"
-    state: latest
-  with_items:
-    - tomcat
-    - unzip
+#- name: install the latest version of Tomcat
+  #yum:
+    #name: "{{item}}"
+    #state: latest
+  #with_items:
+    #- tomcat
+    #- unzip
+- include: basic.yml
+- include: openam.yml
+- include: openamconfig.yml
+- include: openamadmin.yml
 
-- shell: unzip -o -j /vagrant/OpenAM-13.0.0.zip -d /usr/share/tomcat/webapps/
-- shell: mv /usr/share/tomcat/webapps/OpenAM-13.0.0.war /usr/share/tomcat/webapps/openam.war
+#- name: Unziping OpenAM
+  #shell: unzip -o -j /vagrant/AM-eval-5.1.0.zip -d /tmp/openam
 
-- service:
-    name: tomcat
-    state: restarted
+#- name: Move OpenAM war file to Tomcat webapp folder
+  #shell: mv /tmp/openam/AM-eval-5.1.0.war /usr/share/tomcat/webapps/openam.war
 
-- pause:
-    minutes: 1
+#- name: Restarting Tomcat
+  #service:
+    #name: tomcat
+    #state: restarted
 
-- shell: unzip -o /vagrant/SSOConfiguratorTools-13.0.0.zip -d /tmp/openamconf
+#- name: Pausing for 3 minutes to allow the app to deploy
+  #pause:
+    #minutes: 3
 
-- template:
-    src: templates/openamconf.yaml
-    dest: /tmp/openamconf
-- shell: java -jar openam-configurator-tool-13.0.0.jar  -f openamconf.yaml
-  args:
-    chdir: /tmp/openamconf/
+#- name: Unziping OpenAM Configuration Tools
+  #shell: unzip -o /vagrant/AM-SSOConfiguratorTools-5.1.0.zip -d /tmp/openamconf
 
+#### this should be with items..
+#- name: Templating OpenAm conf
+  #template:
+    #src: templates/openamconf.yaml
+    #dest: /tmp/openamconf
 
-- debug: msg="give it 1 minute to deploy and open http://172.16.5.12:8080/openam"
+#- name: Templating Oauth2 agent properties
+  #template:
+    #src: templates/client.properties
+    #dest: /tmp/client.properties
+
+#- name: Templating Oauth2 creds needed
+  #template:
+    #src: templates/creds
+    #dest: /tmp/creds
+    #mode: '0400'
+
+#- name: Running OpenAM Configurator
+  #shell: java -jar openam-configurator-tool-14.1.0.jar -f openamconf.yaml
+  #args:
+    #chdir: /tmp/openamconf/
+
+#- name: Unziping OpenAM SSOAdmin tool
+  #shell: unzip -o /vagrant/AM-SSOAdminTools-5.1.0.zip -d /tmp/openamadmin
+
+#- name: Installing OpenAM SSOAdmin tool
+  #shell: JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.x86_64/jre/ ./setup --acceptLicense --path /usr/share/tomcat/webapps/openam
+  #args:
+    #chdir: /tmp/openamadmin
+
+#- name: Creating OpenAM Oauth2 demo agent
+  #shell: ./ssoadm create-agent --realm / --agentname demo --agenttype "OAuth2Client" --adminid amadmin --password-file /tmp/creds --datafile /tmp/client.properties
+  #args:
+    #chdir: /tmp/openamadmin/openam/bin
+
+#- debug: msg="give it 1 minute to deploy and open http://172.16.5.12:8080/openam"
 
 

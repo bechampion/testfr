@@ -1,0 +1,8 @@
+- name: install the latest version of Tomcat
+  yum:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - tomcat
+    - unzip
+
