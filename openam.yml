@@ -3,4 +3,4 @@
    become: true
    roles:
     - roles/ansible-role-java
-    - roles/ans-tomcat-etc
+    - roles/ans-openam

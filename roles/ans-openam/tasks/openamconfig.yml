@@ -10,5 +10,13 @@
   shell: java -jar openam-configurator-tool-14.1.0.jar -f openamconf.yaml
   args:
     chdir: /tmp/openamconf/
+  register: openamconf
+  ignore_errors: true
 
+##sorry but something wrong wiht openam
+- name: Running OpenAM Configurator
+  shell: java -jar openam-configurator-tool-14.1.0.jar -f openamconf.yaml
+  args:
+    chdir: /tmp/openamconf/
+  when: openamconf.rc != 0
 
